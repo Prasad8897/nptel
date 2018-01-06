@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduce ur self</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<th>Sr No</th>
+			<th>Mail Id</th>
+			<th>Date</th>
+			<th>From </th>
+			<th>To</th>
+			<th>CC</th>
+			<th>subject</th>
+			<th>Group</th>
+		</tr>
+		{% for ed in email_data %}
+			<tr>
+				<td>{{forloop.counter}}</td>
+				<td>{{ed.mail_id}}</td>
+				<td>{{ed.date}}</td>
+				<td>{{ed.from_email.email}}</td>
+				<td>
+					{%for e in ed.to_email.all%}
+						{{e.email}}<br>
+					{%endfor%}
+				</td>
+				<td>
+					{%for e in ed.cc.all%}
+						{{e.email}}<br>
+					{%endfor%}
+				</td>
+				<td>{{ed.subject}}</td>
+				<td>{{ed.mailing_list.list_id}}</td>
+			</tr>
+		{% endfor%}
+	</table>
+</body>
+</html>

@@ -1,0 +1,165 @@
+From nobody Fri Jan  5 18:24:49 2018
+Delivered-To: reviewer1@nptel.iitm.ac.in
+Received: by 10.100.133.15 with SMTP id h15csp481902pjh;
+ Fri, 5 Jan 2018 01:11:24 -0800 (PST)
+X-Received: by 10.202.64.133 with SMTP id n127mr1264911oia.70.1515143484511;
+ Fri, 05 Jan 2018 01:11:24 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1515143484; cv=none;
+ d=google.com; s=arc-20160816;
+ b=stuQU2yd3dwTjAgjFtjrkeF9ad2F7kae+Bzda8q6DnOX06Eci8B6efYXHKe0/9Uyso
+ GIFACCo65fVXdhaNquu4J2ACCalpImMutC4GXUrMzFYTDOxl8tzMhqKEVDP332upxd8n
+ ZX8d08p3AdMArnELrDmVY82rAtGEHRxNNg3EvLafqQlV5IrjEDRxiGu5eXikLRRSM77v
+ z1IWDugz9dq4J8A+WxKZOSK0I16ptbLcgNuXY7CIXBLHIQucReMBvGXf9kCSYgBXrRj1
+ W7Tb2qEDscidQ/oz2Bm4X70NB8SJbjv0VwX4hGBH/dIzG6GUnf7HMjaUo6rczMnJbppJ
+ SVVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20160816; 
+ h=list-unsubscribe:list-subscribe:list-archive:list-help:list-post
+ :list-id:mailing-list:precedence:mime-version:subject:message-id:to
+ :from:date:dkim-signature:dkim-signature:arc-authentication-results;
+ bh=ggDzysAPF2SWEO5UQh83FwliNCyr7LE82JilE5Kfk6E=;
+ b=fqYqaSZ3suPxK2wJAsJpQReAwjvNPgSz/zXhsHvfttrHeJDKnP6vyYvxpCWZV5X8nu
+ ZZB60OiVOBq086x8Ytm6SFmrP+BtGrzthWi6Hd0TXVR5AlxSZsENHA07Vxb8XBnokBwJ
+ Ms+4lTwe2pop9gJvb2vQFAOPDlbpvsNIaSGmm1/y273IZYrTjc/5y17hbZmB77ECt+5/
+ jRfa7ORuj/aUz1FZeWV0soODyV1aAmF7pOA66Nm9AlfuWuIAMEH0baWo1RooN+OiEept
+ Tmq3Si/JjWPWpGLRRbPo+dGXm39lYaLAXvTnHbUuDXVzziECTVmy+4eKvWC8K3kw0C0D
+ 4lAw==
+ARC-Authentication-Results: i=1; mx.google.com;
+ dkim=pass header.i=@nptel-iitm-ac-in.20150623.gappssmtp.com header.s=20150623
+ header.b=szwmWS+e; 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O54x2mhr;
+ spf=neutral (google.com: 209.85.220.69 is neither permitted nor denied by best
+ guess record for domain of
+ noc18-cs01-discuss+bncbcf4jgmzumibboucxxjakgqepecjjuy@nptel.iitm.ac.in)
+ smtp.mailfrom=noc18-cs01-discuss+bncBCF4JGMZUMIBBOUCXXJAKGQEPECJJUY@nptel.iitm.ac.in;
+ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com
+Return-Path: <noc18-cs01-discuss+bncBCF4JGMZUMIBBOUCXXJAKGQEPECJJUY@nptel.iitm.ac.in>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com.
+ [209.85.220.69])
+ by mx.google.com with SMTPS id t58sor1858939oti.156.2018.01.05.01.11.24
+ for <reviewer1@nptel.iitm.ac.in> (Google Transport Security);
+ Fri, 05 Jan 2018 01:11:24 -0800 (PST)
+Received-SPF: neutral (google.com: 209.85.220.69 is neither permitted nor
+ denied by best guess record for domain of
+ noc18-cs01-discuss+bncbcf4jgmzumibboucxxjakgqepecjjuy@nptel.iitm.ac.in)
+ client-ip=209.85.220.69; 
+Authentication-Results: mx.google.com;
+ dkim=pass header.i=@nptel-iitm-ac-in.20150623.gappssmtp.com header.s=20150623
+ header.b=szwmWS+e; 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O54x2mhr;
+ spf=neutral (google.com: 209.85.220.69 is neither permitted nor denied by best
+ guess record for domain of
+ noc18-cs01-discuss+bncbcf4jgmzumibboucxxjakgqepecjjuy@nptel.iitm.ac.in)
+ smtp.mailfrom=noc18-cs01-discuss+bncBCF4JGMZUMIBBOUCXXJAKGQEPECJJUY@nptel.iitm.ac.in;
+ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nptel-iitm-ac-in.20150623.gappssmtp.com; s=20150623;
+ h=date:from:to:message-id:subject:mime-version:x-original-sender
+ :precedence:mailing-list:list-id:list-post:list-help:list-archive
+ :list-subscribe:list-unsubscribe;
+ bh=ggDzysAPF2SWEO5UQh83FwliNCyr7LE82JilE5Kfk6E=;
+ b=szwmWS+eePugI5VUN7BapfKE/HBeW/+sFb5axa3y1v7uFQ7FUNWkVRn2Kwai1K3gwZ
+ uey9wUvtyQxRIzSDl9bhf6lp/DTw1KOJAUmTAq2vtFeBCnLSmfdCRcSqDa/xSHsWCYow
+ GXEq0q8kLq/n635vQTFfJyqBPLOkRZEroN/SLKJXpKYdep5dyjtKs164QXyhHFGK7vIo
+ oL4k0lsC0QvRaV89WqjbAjjzrICW7r55Mwxs4n29OPJNlEpFzdpYB/w+hrCfeJxNNMfC
+ yZgdWC70NWl6if9mDaeDUNktv0vkN8JU+3tcHksS2+l8d92Vt50eWUkZGD0iOEnfT6P+
+ 1eTw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:message-id:subject:mime-version:x-original-sender
+ :precedence:mailing-list:list-id:list-post:list-help:list-archive
+ :list-subscribe:list-unsubscribe;
+ bh=ggDzysAPF2SWEO5UQh83FwliNCyr7LE82JilE5Kfk6E=;
+ b=O54x2mhrYMxhYBm4FdLScPFl0jvmk/iQMDkCf1o8oCBKOrVk8QkifFf1Y6DiGHyJiL
+ WyH5bZM6IG1DJR7P26PqNK6FgK52Mvyfztq3V+T/nxbnSBlUybJak+QPg0nkDQKsMW08
+ FdjCkmB23A6/ac+RTZt3YaWxuCaGb0UFtEka/ejnP+cyKZHPhHX+UpKri5mKklPTXbE8
+ 4zy6fIGntUofyPA2khTzqVga6t12cj+iRCBM1vDFH51/q68JfiKc70hYf91SCaDWyJVy
+ T5IU/xolvL41r3qhkG+Gg0mwWVzRvoNoavIdNiqOo3INUsnG7AWcHggf/bdbeKHvJsKv
+ I8hQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:message-id:subject:mime-version
+ :x-original-sender:precedence:mailing-list:list-id:list-post
+ :list-help:list-archive:list-subscribe:list-unsubscribe;
+ bh=ggDzysAPF2SWEO5UQh83FwliNCyr7LE82JilE5Kfk6E=;
+ b=P6uAWN5l8+smnH5X1iS9Dp+rymHiy+idTLn8BOZBlZhGMq61PbouJyZw/M2PMWkLwN
+ KPAat1zrPuwcmZpZdbO8kHLx+4ryIhtgnq+NYCOTn85EkYCEAPkq28qbb1XtRbZvLQhx
+ pACye1hCQSoAsFTZGdhNmTongZpRxP1trt7mWSlNN69ecxK5+pWKvM8TQXZrYEThB5s/
+ 7M49ueQyJgAGj1L5xXzeBSxJ5sWPFhQWpG3nPiRdfOiJYQ8RmtOaFrkPbKhGcGmv8T2j
+ zrfGL9WH21BlfpqMILrkodpJcjmtYzyqg094cvupwin5DtRlhwtLeID2S/N6kMJOv7rV
+ 4L5Q==
+X-Gm-Message-State: AKwxytdeOIhoSs2NipLvWQevTIywrukVXniWJpjCNNWx7ILMkd6Z2VUF
+ I0W5xzvhmSm40eKOb/6DPls1btVw
+X-Google-Smtp-Source: ACJfBoskzEqw58H5WtvJa+uhOdWyB9YbES7oniuetOVeQ95To22Am/199gkuCbeBIvCDjGsploLWUA==
+X-Received: by 10.157.85.1 with SMTP id l1mr1235033oth.118.1515143484262;
+ Fri, 05 Jan 2018 01:11:24 -0800 (PST)
+X-BeenThere: noc18-cs01-discuss@nptel.iitm.ac.in
+Received: by 10.202.214.151 with SMTP id n145ls598897oig.20.gmail; Fri, 05 Jan
+ 2018 01:11:22 -0800 (PST)
+X-Received: by 10.157.82.108 with SMTP id q44mr104191otg.13.1515143481908;
+ Fri, 05 Jan 2018 01:11:21 -0800 (PST)
+Date: Fri, 5 Jan 2018 01:11:21 -0800 (PST)
+From: tamil.sabitha@gmail.com
+To: Discussion forum for Computer Organization and Architecture
+ <noc18-cs01-discuss@nptel.iitm.ac.in>
+Message-Id: <5aa4fb71-44da-4108-8e1b-f878e95a51f1@nptel.iitm.ac.in>
+Subject: Intro
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+ boundary="----=_Part_4152_549402834.1515143481494"
+X-Original-Sender: tamil.sabitha@gmail.com
+Precedence: list
+Mailing-list: list noc18-cs01-discuss@nptel.iitm.ac.in;
+ contact noc18-cs01-discuss+owners@nptel.iitm.ac.in
+List-ID: <noc18-cs01-discuss.nptel.iitm.ac.in>
+X-Google-Group-Id: 979205934766
+List-Post: <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/post>, 
+ <mailto:noc18-cs01-discuss@nptel.iitm.ac.in>
+List-Help: <https://support.google.com/a/nptel.iitm.ac.in/bin/topic.py?topic=25838>, 
+ <mailto:noc18-cs01-discuss+help@nptel.iitm.ac.in>
+List-Archive: <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/>
+List-Subscribe: <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/subscribe>,
+ <mailto:noc18-cs01-discuss+subscribe@nptel.iitm.ac.in>
+List-Unsubscribe: <mailto:googlegroups-manage+979205934766+unsubscribe@googlegroups.com>, 
+ <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/subscribe>
+
+------=_Part_4152_549402834.1515143481494
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_4153_1184779210.1515143481494"
+
+------=_Part_4153_1184779210.1515143481494
+Content-Type: text/plain; charset="UTF-8"
+
+sir,
+ I am Tamil Selvi Assistant Prof/CSE working in Madurai. Interested to know 
+the basics of Computer Architecture
+
+-- 
+You received this message because you are subscribed to the Google Groups "Discussion forum for Computer Organization and Architecture" group.
+To unsubscribe from this group and stop receiving emails from it, send an email to noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in.
+To view this discussion on the web visit https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/5aa4fb71-44da-4108-8e1b-f878e95a51f1%40nptel.iitm.ac.in.
+
+------=_Part_4153_1184779210.1515143481494
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">sir,<br>=C2=A0I am Tamil Selvi Assistant Prof/CSE working =
+in Madurai. Interested to know the basics of Computer Architecture</div>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;Discussion forum for Computer Organization and Architecture&quot; grou=
+p.<br />
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in">=
+noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in</a>.<br />
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/5aa4fb71-44da-4108-8e1b-f8=
+78e95a51f1%40nptel.iitm.ac.in?utm_medium=3Demail&utm_source=3Dfooter">https=
+://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/5aa4fb71=
+-44da-4108-8e1b-f878e95a51f1%40nptel.iitm.ac.in</a>.<br />
+
+------=_Part_4153_1184779210.1515143481494--
+
+------=_Part_4152_549402834.1515143481494--

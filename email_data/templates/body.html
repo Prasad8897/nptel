@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduce ur self</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<th>EmailData_id</th>
+			<th>Body</th>
+		</tr>
+		{% for b in body %}
+			<tr>
+				<td>{{b.email_data__mail_id}}</td>
+				<td>{{b.body}}</td>
+			</tr>
+		{% endfor%}
+	</table>
+</body>
+</html>

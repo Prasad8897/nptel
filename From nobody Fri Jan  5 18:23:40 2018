@@ -1,0 +1,371 @@
+From nobody Fri Jan  5 18:23:40 2018
+Delivered-To: reviewer1@nptel.iitm.ac.in
+Received: by 10.100.133.15 with SMTP id h15csp602083pjh;
+ Fri, 5 Jan 2018 03:29:38 -0800 (PST)
+X-Received: by 10.46.4.6 with SMTP id 6mr1752971lje.117.1515151778823;
+ Fri, 05 Jan 2018 03:29:38 -0800 (PST)
+ARC-Seal: i=3; a=rsa-sha256; t=1515151778; cv=pass;
+ d=google.com; s=arc-20160816;
+ b=v3mSImiX0icBLTqhgkoeqGnyLZ5PY3iRSSG0n370FRcNhFfw2Whw+PYDYeW29/jABO
+ bBHAfxMlkv0ufU1g2uF1MQ+LBYph/gBbOPt4gUjyQ8+snJPpyFWRqSzfz/XEV4eVQVgD
+ eSnhMXrA6eckJndvMvBmmeNoZhM+ur3JU9jxxJVeENqw4r3Sj/rFNMyy42FUYloFhZel
+ MLqOYIQkhbGaDGWxtf1gbA4tlVECNencYMkE/skJa8gv5003bBgwwCab3JRX0zo5wJ4P
+ 4dXIYgi6B7XsF+XBhR6oKYEzB9W8L2nXaFcNmeYTQhF+nQ5LyqyAjAUDUvP2tDB47tnb
+ kLjA==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20160816; 
+ h=list-unsubscribe:list-subscribe:list-archive:list-help:list-post
+ :list-id:mailing-list:precedence:cc:to:subject:message-id:date:from
+ :references:in-reply-to:reply-to:mime-version
+ :arc-authentication-results:arc-message-signature:dkim-signature
+ :arc-authentication-results:arc-message-signature
+ :arc-authentication-results;
+ bh=V16NweQ2Mi8K+OVV/aEHrQh5TB/jdsvguX+JYsBYQ8s=;
+ b=a73iSAmzlZCGcJ/LJmpvaUSpCVLPmMyML8a9rZ579bIMtYsBp/5zJdBXVdwn4/DNrO
+ GUiqajhali/Yr6KyUtrEd9jbq96sOHNJUG8ZEEsgWPWvZbzzcZd8erMqa5zXSDsWWtpK
+ t2QUNO6hnadf9ecZDqkpqvvR6I6C/JofyWe37PkbEYRwE+dsU61aekhuZrISKfB4YuR6
+ beGf7qhldeFZJALlq8OvDFYRwdOd8SoYIZ6w0vSNffp3M2PdGPmu13pVKY4bKpbVKsYl
+ +Vt3rhiULNzOohIbW8CqS05SdMrPS1rXFGIMJSXmsu74qR/ShkvvRP0t0/nuL0YFOb0v
+ RM+A==
+ARC-Authentication-Results: i=3; mx.google.com;
+ dkim=pass header.i=@nptel-iitm-ac-in.20150623.gappssmtp.com header.s=20150623
+ header.b=P2biQLyy; 
+ arc=pass (i=2 spf=pass spfdomain=gmail.com dkim=pass dkdomain=gmail.com
+ dmarc=pass fromdomain=gmail.com); 
+ spf=neutral (google.com: 209.85.220.69 is neither permitted nor denied by best
+ guess record for domain of
+ noc18-cs01-discuss+bncbcr2zsux3ibrbhwdxxjakgqeqdzkz5q@nptel.iitm.ac.in)
+ smtp.mailfrom=noc18-cs01-discuss+bncBCR2ZSUX3IBRBHWDXXJAKGQEQDZKZ5Q@nptel.iitm.ac.in;
+ dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=gmail.com
+Return-Path: <noc18-cs01-discuss+bncBCR2ZSUX3IBRBHWDXXJAKGQEQDZKZ5Q@nptel.iitm.ac.in>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com.
+ [209.85.220.69])
+ by mx.google.com with SMTPS id i1sor995563ljd.30.2018.01.05.03.29.38
+ for <reviewer1@nptel.iitm.ac.in> (Google Transport Security);
+ Fri, 05 Jan 2018 03:29:38 -0800 (PST)
+Received-SPF: neutral (google.com: 209.85.220.69 is neither permitted nor
+ denied by best guess record for domain of
+ noc18-cs01-discuss+bncbcr2zsux3ibrbhwdxxjakgqeqdzkz5q@nptel.iitm.ac.in)
+ client-ip=209.85.220.69; 
+Authentication-Results: mx.google.com;
+ dkim=pass header.i=@nptel-iitm-ac-in.20150623.gappssmtp.com header.s=20150623
+ header.b=P2biQLyy; 
+ arc=pass (i=2 spf=pass spfdomain=gmail.com dkim=pass dkdomain=gmail.com
+ dmarc=pass fromdomain=gmail.com); 
+ spf=neutral (google.com: 209.85.220.69 is neither permitted nor denied by best
+ guess record for domain of
+ noc18-cs01-discuss+bncbcr2zsux3ibrbhwdxxjakgqeqdzkz5q@nptel.iitm.ac.in)
+ smtp.mailfrom=noc18-cs01-discuss+bncBCR2ZSUX3IBRBHWDXXJAKGQEQDZKZ5Q@nptel.iitm.ac.in;
+ dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=gmail.com
+ARC-Seal: i=2; a=rsa-sha256; t=1515151778; cv=pass;
+ d=google.com; s=arc-20160816;
+ b=cw618VyZ52iltTQnW6TGL+Bn40oyDXkcxr+xkzQmhavBW/2P+2rTkSlLAzBG3MiQZw
+ 6jrKJfMnqzvogUFtscIwzrYzPX5FxrcyJBRveLoBdSRl5uIlMOS87V6vWUoACxxyOEs0
+ 5SaofoRmycIs4vqtyXRTRqwa/WzwYHforD5u2KjPRXpGvHGZepDqzxpXd3ECVYvaQ9BP
+ A03P0GQ3OeCiCzN8IZciav1oVg8qlW3YxH6phVxxpBmt1+b7UmPek0+ebinW1BGwZjz/
+ DEyfJMOS8YtEHiio0kw2E72wJYq0VZr8ik3qqOQ7U0jShMkEDdRhqje71XF1+fVTmgA0
+ 4Brg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20160816; 
+ h=list-unsubscribe:list-subscribe:list-archive:list-help:list-post
+ :list-id:mailing-list:precedence:cc:to:subject:message-id:date:from
+ :references:in-reply-to:reply-to:mime-version
+ :arc-authentication-results:arc-message-signature:dkim-signature
+ :arc-authentication-results;
+ bh=V16NweQ2Mi8K+OVV/aEHrQh5TB/jdsvguX+JYsBYQ8s=;
+ b=fn3D6UOLGbkfONr7KUYjr4g5ubGBZVnuqTvKOtXkfR1zY/jYYEi+vXDOa3hWnozFOc
+ 2apcEXgRMOrgOxcXnF8QsHtFRV12V3n3sk7CjQgtrJn0TegVurWQuKoW0D7ecHWr4GR1
+ tTNg+KdFHLvIpFvcgvSKIwRGlmfcKBdEmoeDQiXE9g+uRscgs4874QDp2p6x1GgubJCe
+ EndGwl7JOPmirs2BJ+pQ/abG5t3jXP5q1yhTsfdzELF+WNOlg5miH6Y7CuuM4t6njpXu
+ VgU9DQ0rzq1pIpPVTXXa5z+znMVs9kb/af7q9tLsWsPDhfzP8/6Yi157l23ssMix+tSy
+ 5IUQ==
+ARC-Authentication-Results: i=2; mx.google.com;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=t+evxHW6;
+ spf=pass (google.com: domain of kpal090@gmail.com designates 209.85.220.65 as
+ permitted sender) smtp.mailfrom=kpal090@gmail.com; 
+ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nptel-iitm-ac-in.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:reply-to:in-reply-to:references:from:date:message-id
+ :subject:to:cc:x-original-sender:x-original-authentication-results
+ :precedence:mailing-list:list-id:list-post:list-help:list-archive
+ :list-subscribe:list-unsubscribe;
+ bh=V16NweQ2Mi8K+OVV/aEHrQh5TB/jdsvguX+JYsBYQ8s=;
+ b=P2biQLyyWzDa7NvWbLNGB/xD+3KSX1a3+u2EZB7bonLEJr2qkC+1SzDz+BKqHXWJV6
+ kL6ubD2CDPQHQk4T3QCUFTCxrWel5uF4y0xBsYG3Znbaa9qYuuP55JV59q/ELi4pB0xZ
+ fgofW/0LERmeAImb0oXWMUvqDz+c7TXjJy9Hein0zErDVlYQTnCpRBl1wyRqFl1MNyiq
+ fgis8DGPMlY9e7QpNcligvquzcMITt6qF++J5CEvwPWWZ9zF+Z5v6MztO39FW3domjvg
+ BGZIpuyHR8wZpbfZ1mAgE5KVJimmZ3jfyUNIgLADoJ4G6P4UiWJEU6xUTdt1XTwJ8UM0
+ YCsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:reply-to:in-reply-to:references
+ :from:date:message-id:subject:to:cc:x-original-sender
+ :x-original-authentication-results:precedence:mailing-list:list-id
+ :list-post:list-help:list-archive:list-subscribe:list-unsubscribe;
+ bh=V16NweQ2Mi8K+OVV/aEHrQh5TB/jdsvguX+JYsBYQ8s=;
+ b=SucJtg8qSa5x49qIZHfGbhF+RrY5zVdhilGnFlBTPJdkobpshZwZlk3FcFf4umf1w9
+ aBx1Lxeb4irtihCPamTsBtFQUfXLRC4NSqHc1A/wWlMe/9O+VxL32cHS8K+ahDZG3Ek3
+ sO0gJNaG3w2RxQD6D8lOzJT1mqn/u0Xk5PnThR+ugijuh8ze+lCV18UkvT8Sr1HJSsKr
+ +G7K31yF37tKarfLHGnJOHmcm6LzHe8D4+hnKtmtHvdXOUMK56XYBhNGjt/SQJgtSWBU
+ hryTaQIYo5WHjdBgKJoxQWUftVftMWl6KKUwJYjs6M799KuclbCE6qTKvymgi6ezr6C1
+ dI+g==
+X-Gm-Message-State: AKGB3mKKdwMcsdC/j/4OVsgBTeT3VqLrWChSgbaWrLHTkKs8ehhEY/b6
+ zJKrszLyEtuybU3Gnu7Zb2chvrj4
+X-Google-Smtp-Source: ACJfBotwu0aN4LvIlWQwK3rM3HXAxLj1a+2RPK3NsuKKX98Wsb4axdyha1icdUW9szi7j0sFwQ/IXQ==
+X-Received: by 10.46.43.80 with SMTP id q77mr154955lje.43.1515151778418;
+ Fri, 05 Jan 2018 03:29:38 -0800 (PST)
+X-BeenThere: noc18-cs01-discuss@nptel.iitm.ac.in
+Received: by 10.46.23.207 with SMTP id 76ls274681ljx.5.gmail; Fri, 05 Jan 2018
+ 03:29:33 -0800 (PST)
+X-Received: by 10.25.25.3 with SMTP id 3mr1434405lfz.146.1515151773954;
+ Fri, 05 Jan 2018 03:29:33 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1515151773; cv=none;
+ d=google.com; s=arc-20160816;
+ b=m5CxGp53Ks9G2m04aqUJ0q/3l+zNG3qSZgG/PDuiq+jN5wS3JZFg730mvozG2/Cdss
+ NFcwt/DflkLhDkCvKyjw0RueFua//qXFsYL8MAjFlKOTmhAKvrVkLR7EwzmAOtQDsO9q
+ hy2ViVJUXOHBErTKOEhocG6vNOTgMwCdnl03msj+8Jmp06dkebP/75VF44wPv+vFBGuk
+ AABtlTJGHHhF4+wUXY+dD3R49pg8F/ZWnQVyOifjkrLiSX5cE2+vxdEIJOgMx8t8qDIJ
+ 3sX39CJf9MoiJSwEUIyalAQOuS+FxnuRRJVZr0xsS5uGBDXWk+7aRFFUZE+62xXTTe0h
+ Gnuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20160816; 
+ h=cc:to:subject:message-id:date:from:references:in-reply-to:reply-to
+ :mime-version:dkim-signature:arc-authentication-results;
+ bh=NQCAZTDyoX7Z4IsN1S7HM25PqZODPD2syG1+KG8aZDQ=;
+ b=FFhNJMBHdDIA96ReGNaI2CXHTOMwOS3Ql8uC5ac5tGxQ+0m2WEUp1rmEl67HCb93GC
+ 7978hrqvUqjVlUuCU6X/d9TtBt28vAweYF+MD2kTe5FFWZnkKiMwL6/Ph/flV7L5Khpo
+ LyrVBzjHBfGDGMFpyqrkudMv4sPTJ+qepYSpTx5a5bMLLMZHjwKx4bOZ9l9IAngH++gs
+ 8qNBKObtkjZz9EY3T7hwXnn96407E5wqt+bHxGPwQcb3e8AK8ooYqe1warRLqYf0OJof
+ tDurcTJ2AMK7tK+gkNinFrdncjLlytZ5+xlB1M6N2NQ2kIyikn2Vv3Fmtx0vzrho2HeD
+ CIAw==
+ARC-Authentication-Results: i=1; mx.google.com;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=t+evxHW6;
+ spf=pass (google.com: domain of kpal090@gmail.com designates 209.85.220.65 as
+ permitted sender) smtp.mailfrom=kpal090@gmail.com; 
+ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com
+Received: from mail-sor-f65.google.com (mail-sor-f65.google.com.
+ [209.85.220.65])
+ by mx.google.com with SMTPS id 20sor1010333ljf.86.2018.01.05.03.29.33
+ for <noc18-cs01-discuss@nptel.iitm.ac.in>
+ (Google Transport Security); Fri, 05 Jan 2018 03:29:33 -0800 (PST)
+Received-SPF: pass (google.com: domain of kpal090@gmail.com designates
+ 209.85.220.65 as permitted sender) client-ip=209.85.220.65; 
+X-Received: by 10.46.69.84 with SMTP id s81mr1726585lja.96.1515151773425; Fri,
+ 05 Jan 2018 03:29:33 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.25.44.197 with HTTP; Fri, 5 Jan 2018 03:29:32 -0800 (PST)
+Reply-To: kpal090@gmail.com
+In-Reply-To: <CAHtRdXyYve=5fRXB58tpJAWnrjN3-2GKJx+J3ddbCC1By7vGPA@mail.gmail.com>
+References: <5aa4fb71-44da-4108-8e1b-f878e95a51f1@nptel.iitm.ac.in>
+ <CAHtRdXyYve=5fRXB58tpJAWnrjN3-2GKJx+J3ddbCC1By7vGPA@mail.gmail.com>
+From: KUSHAL CHAUDHARY <kpal090@gmail.com>
+Date: Fri, 5 Jan 2018 03:29:32 -0800
+Message-ID: <CANq7t8hUoke2=GMN21ZZM150iafz-psVAbwU2iePXdQongBgHg@mail.gmail.com>
+Subject: Re: Intro
+To: Discussion forum for Computer Organization and Architecture
+ <noc18-cs01-discuss@nptel.iitm.ac.in>
+Cc: anupriyababbar.86@gmail.com, tamil.sabitha@gmail.com
+Content-Type: multipart/alternative; boundary="001a114b0f2c3c6501056205c3f0"
+X-Original-Sender: kpal090@gmail.com
+X-Original-Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@gmail.com header.s=20161025 header.b=t+evxHW6;       spf=pass
+ (google.com: domain of kpal090@gmail.com designates 209.85.220.65 as
+ permitted sender) smtp.mailfrom=kpal090@gmail.com;       dmarc=pass (p=NONE
+ sp=NONE dis=NONE) header.from=gmail.com
+Precedence: list
+Mailing-list: list noc18-cs01-discuss@nptel.iitm.ac.in;
+ contact noc18-cs01-discuss+owners@nptel.iitm.ac.in
+List-ID: <noc18-cs01-discuss.nptel.iitm.ac.in>
+X-Google-Group-Id: 979205934766
+List-Post: <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/post>, 
+ <mailto:noc18-cs01-discuss@nptel.iitm.ac.in>
+List-Help: <https://support.google.com/a/nptel.iitm.ac.in/bin/topic.py?topic=25838>, 
+ <mailto:noc18-cs01-discuss+help@nptel.iitm.ac.in>
+List-Archive: <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/>
+List-Subscribe: <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/subscribe>,
+ <mailto:noc18-cs01-discuss+subscribe@nptel.iitm.ac.in>
+List-Unsubscribe: <mailto:googlegroups-manage+979205934766+unsubscribe@googlegroups.com>, 
+ <https://groups.google.com/a/nptel.iitm.ac.in/group/noc18-cs01-discuss/subscribe>
+
+--001a114b0f2c3c6501056205c3f0
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+I am Kushal Chaudhary working as Asst. Professor in Dept. of CSE, Dr. K.N.
+Modi University, Newai Jaipur, Rajasthan. I taught Computer Organization
+and Architecture of B.Tech CSE Odd Sem Students. I want to learn the
+delivery method of contents of the subject. So I will improve leaching
+learning mechanism in new paradigms. I am very thankful to NPTEL Team.
+
+
+
+<https://mailtrack.io/> Sent with Mailtrack
+<https://chrome.google.com/webstore/detail/mailtrack-for-gmail-inbox/ndnaehgpjlnokgebbaldlmgkapkpjkkb?utm_source=gmail&utm_medium=signature&utm_campaign=signaturevirality>
+
+On Fri, Jan 5, 2018 at 1:29 AM, Anupriya Babbar <anupriyababbar.86@gmail.com
+> wrote:
+
+> hiii
+>  I am anupriya babbar woeking  as Asst. Prof. in TCET, Mumbai. Intrested
+> to know basics of computer organization and architecture
+>
+> On 5 Jan 2018 14:41, <tamil.sabitha@gmail.com> wrote:
+>
+>> sir,
+>>  I am Tamil Selvi Assistant Prof/CSE working in Madurai. Interested to
+>> know the basics of Computer Architecture
+>>
+>> --
+>> You received this message because you are subscribed to the Google Groups
+>> "Discussion forum for Computer Organization and Architecture" group.
+>> To unsubscribe from this group and stop receiving emails from it, send an
+>> email to noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in.
+>> To view this discussion on the web visit https://groups.google.com/a/np
+>> tel.iitm.ac.in/d/msgid/noc18-cs01-discuss/5aa4fb71-44da-
+>> 4108-8e1b-f878e95a51f1%40nptel.iitm.ac.in
+>> <https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/5aa4fb71-44da-4108-8e1b-f878e95a51f1%40nptel.iitm.ac.in?utm_medium=email&utm_source=footer>
+>> .
+>>
+> --
+> You received this message because you are subscribed to the Google Groups
+> "Discussion forum for Computer Organization and Architecture" group.
+> To unsubscribe from this group and stop receiving emails from it, send an
+> email to noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in.
+> To view this discussion on the web visit https://groups.google.com/a/
+> nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/CAHtRdXyYve%
+> 3D5fRXB58tpJAWnrjN3-2GKJx%2BJ3ddbCC1By7vGPA%40mail.gmail.com
+> <https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/CAHtRdXyYve%3D5fRXB58tpJAWnrjN3-2GKJx%2BJ3ddbCC1By7vGPA%40mail.gmail.com?utm_medium=email&utm_source=footer>
+> .
+>
+
+
+
+-- 
+
+Thanks & Regards,
+
+Kushall Pal Singh
+Assistant Professor,
+
+Dept. of Computer Science & Engineering,
+
+Dr. K N Modi University, Newai, Raj.
+
+Ph:-+91-9358230980
+
+-- 
+You received this message because you are subscribed to the Google Groups "Discussion forum for Computer Organization and Architecture" group.
+To unsubscribe from this group and stop receiving emails from it, send an email to noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in.
+To view this discussion on the web visit https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/CANq7t8hUoke2%3DGMN21ZZM150iafz-psVAbwU2iePXdQongBgHg%40mail.gmail.com.
+
+--001a114b0f2c3c6501056205c3f0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><img width=3D"0" height=3D"0" class=3D"mailtrack-img" alt=
+=3D"" style=3D"display:flex" src=3D"https://mailtrack.io/trace/mail/b136644=
+64411d30b4ac6c9e4b750c308c97ed8da.png?u=3D2238286">Hello,<div><br></div><di=
+v>I am Kushal Chaudhary working as Asst. Professor in Dept. of CSE, Dr. K.N=
+. Modi University, Newai Jaipur, Rajasthan. I taught Computer Organization =
+and Architecture of B.Tech CSE Odd Sem Students. I want to learn the delive=
+ry method of contents of the subject. So I will improve leaching learning m=
+echanism in new paradigms. I am very thankful to NPTEL Team.=C2=A0 =C2=A0=
+=C2=A0<br><br><br><br><div class=3D"mt-signature">
+        <a href=3D"https://mailtrack.io/" class=3D"mt-signature-logo" style=
+=3D"text-decoration:none"><img src=3D"https://s3-eu-west-1.amazonaws.com/ma=
+iltrack-crx/icon-signature.png" height=3D"14"></a> <font style=3D"color:#99=
+9">Sent with <a href=3D"https://chrome.google.com/webstore/detail/mailtrack=
+-for-gmail-inbox/ndnaehgpjlnokgebbaldlmgkapkpjkkb?utm_source=3Dgmail&amp;ut=
+m_medium=3Dsignature&amp;utm_campaign=3Dsignaturevirality" class=3D"mt-inst=
+all">Mailtrack</a></font>
+       =20
+   =20
+    </div></div></div><div class=3D"gmail_extra"><br><div class=3D"gmail_qu=
+ote">On Fri, Jan 5, 2018 at 1:29 AM, Anupriya Babbar <span dir=3D"ltr">&lt;=
+<a href=3D"mailto:anupriyababbar.86@gmail.com" target=3D"_blank">anupriyaba=
+bbar.86@gmail.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote=
+" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><=
+div dir=3D"auto">hiii<div dir=3D"auto">=C2=A0I am anupriya babbar woeking=
+=C2=A0 as Asst. Prof. in TCET, Mumbai. Intrested to know basics of computer=
+ organization and architecture</div></div><div><div class=3D"h5"><div class=
+=3D"gmail_extra"><br><div class=3D"gmail_quote">On 5 Jan 2018 14:41,  &lt;<=
+a href=3D"mailto:tamil.sabitha@gmail.com" target=3D"_blank">tamil.sabitha@g=
+mail.com</a>&gt; wrote:<br type=3D"attribution"><blockquote class=3D"gmail_=
+quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
+ex"><div dir=3D"ltr">sir,<br>=C2=A0I am Tamil Selvi Assistant Prof/CSE work=
+ing in Madurai. Interested to know the basics of Computer Architecture</div=
+>
+
+<p></p>
+
+-- <br>
+You received this message because you are subscribed to the Google Groups &=
+quot;Discussion forum for Computer Organization and Architecture&quot; grou=
+p.<br>
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in" =
+target=3D"_blank">noc18-cs01-discuss+unsubscribe<wbr>@nptel.iitm.ac.in</a>.=
+<br>
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/5aa4fb71-44da-4108-8e1b-f8=
+78e95a51f1%40nptel.iitm.ac.in?utm_medium=3Demail&amp;utm_source=3Dfooter" t=
+arget=3D"_blank">https://groups.google.com/a/np<wbr>tel.iitm.ac.in/d/msgid/=
+noc18-<wbr>cs01-discuss/5aa4fb71-44da-<wbr>4108-8e1b-f878e95a51f1%40nptel<w=
+br>.iitm.ac.in</a>.<br>
+</blockquote></div></div>
+
+<p></p>
+
+-- <br>
+You received this message because you are subscribed to the Google Groups &=
+quot;Discussion forum for Computer Organization and Architecture&quot; grou=
+p.<br>
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in" =
+target=3D"_blank">noc18-cs01-discuss+<wbr>unsubscribe@nptel.iitm.ac.in</a>.=
+<br></div></div>
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/CAHtRdXyYve%3D5fRXB58tpJAW=
+nrjN3-2GKJx%2BJ3ddbCC1By7vGPA%40mail.gmail.com?utm_medium=3Demail&amp;utm_s=
+ource=3Dfooter" target=3D"_blank">https://groups.google.com/a/<wbr>nptel.ii=
+tm.ac.in/d/msgid/<wbr>noc18-cs01-discuss/<wbr>CAHtRdXyYve%<wbr>3D5fRXB58tpJ=
+AWnrjN3-2GKJx%<wbr>2BJ3ddbCC1By7vGPA%40mail.<wbr>gmail.com</a>.<br>
+</blockquote></div><br><br clear=3D"all"><div><br></div>-- <br><div class=
+=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><d=
+iv><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><br>=
+</div><div dir=3D"ltr"><font face=3D"comic sans ms, sans-serif">Thanks &amp=
+; Regards,</font></div><div dir=3D"ltr"><font face=3D"comic sans ms, sans-s=
+erif"><br></font></div><div dir=3D"ltr"><span style=3D"font-family:&quot;co=
+mic sans ms&quot;,sans-serif;font-size:12.8px">Kushall</span><span style=3D=
+"font-family:&quot;comic sans ms&quot;,sans-serif;font-size:12.8px">=C2=A0P=
+al Singh</span><br></div><div dir=3D"ltr"><div><font face=3D"comic sans ms,=
+ sans-serif">Assistant Professor,</font></div><div><p style=3D"font-size:12=
+.8px;margin:0in 0in 0pt"><span style=3D"font-size:12.8px"><font face=3D"com=
+ic sans ms, sans-serif">Dept. of Computer Science &amp; Engineering,</font>=
+</span></p><p style=3D"font-size:12.8px;margin:0in 0in 0pt"><span style=3D"=
+font-size:12.8px"><font face=3D"comic sans ms, sans-serif">Dr. K N Modi Uni=
+versity, Newai, Raj.</font></span></p><p style=3D"font-size:12.8px;margin:0=
+in 0in 0pt"><font face=3D"comic sans ms, sans-serif">Ph:-+91-9358230980</fo=
+nt></p><div style=3D"font-size:12.8px"><br><br></div></div></div></div></di=
+v></div></div></div></div>
+</div>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;Discussion forum for Computer Organization and Architecture&quot; grou=
+p.<br />
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in">=
+noc18-cs01-discuss+unsubscribe@nptel.iitm.ac.in</a>.<br />
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-discuss/CANq7t8hUoke2%3DGMN21ZZM15=
+0iafz-psVAbwU2iePXdQongBgHg%40mail.gmail.com?utm_medium=3Demail&utm_source=
+=3Dfooter">https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc18-cs01-=
+discuss/CANq7t8hUoke2%3DGMN21ZZM150iafz-psVAbwU2iePXdQongBgHg%40mail.gmail.=
+com</a>.<br />
+
+--001a114b0f2c3c6501056205c3f0--
