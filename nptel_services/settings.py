@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # apps
     'email_data.apps.EmailDataConfig',
-    'email_data.templates.customTags',
 ]
 
 MIDDLEWARE = [

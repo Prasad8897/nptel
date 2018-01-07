@@ -68,13 +68,6 @@ def read_email_from_gmail():
                             f.write(str(msg))
                             f.close()
                         print id_list[i]
-                    '''
-                    for part in msg.walk():
-                        if msg['mailing-list']:
-                            if part.get_content_type() == 'text/plain' and part.get_filename() is None:
-                                process1(msg, id_list[i], part.get_payload(decode=True).decode(part.get_charsets()[0]))
-                                break
-                    '''
             i -= 1
         except mail.abort:
             mail.logout()
