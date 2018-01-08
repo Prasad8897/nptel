@@ -24,12 +24,14 @@ class MailingList(models.Model):
 class EmailData(models.Model):
 
 	date = models.DateTimeField()
-	from_email = models.ForeignKey(Email, related_name='from_email')
+	from_email = models.ForeignKey(Email, related_name='from_email', on_delete=models.CASCADE)
 	to_email = models.ManyToManyField(Email, related_name='to_email')
 	cc = models.ManyToManyField(Email, related_name='cc')
 	subject = models.CharField(max_length=10000)
-	mailing_list = models.ForeignKey(MailingList)
+	mailing_list = models.ForeignKey(MailingList, on_delete=models.CASCADE)
 	mail_id = models.IntegerField(default=0, unique=True)
+	in_reply_id = models.CharField(max_length=1000, null=True)
+	message_id = models.CharField(max_length=1000, null=True)
 
 	def __str__(self):
 		return self.mail_id
@@ -47,7 +49,3 @@ class EmailBody(models.Model):
 	contentType = models.CharField(max_length=20)
 	body = models.TextField()
 
-class  FullEmail(models.Model):
-	
-	mail_id = models.IntegerField(default=0)
-	data = models.TextField()

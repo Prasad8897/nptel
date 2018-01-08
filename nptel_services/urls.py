@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from email_data.api import CourseMetaData, AllEmailData
 from mail_reader import read_email_from_gmail
-read_email_from_gmail()
+#read_email_from_gmail()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
