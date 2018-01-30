@@ -37,14 +37,14 @@ def CourseMetaData(request, courseId):
 			'unanswered': threads-count,
 			})
 
-@api_view(['GET', 'PATCH'])
+@api_view(['GET', 'PATCH', 'DELETE'])
 def AllEmailData(request, courseId):
+	group = courseId+"-discuss@nptel.iitm.ac.in"
+	m = MailingList.objects.filter(list_id=group)
+	allEmails = EmailData.objects.filter(mailing_list=m).order_by('-date')
+	if not m.exists():
+		return JsonResponse(status=404, data={'status':'404','message':MAILINGLIST_NOT_FOUND})
 	if request.method == 'GET':
-		group = courseId+"-discuss@nptel.iitm.ac.in"
-		m = MailingList.objects.filter(list_id=group)
-		if not m.exists():
-			return JsonResponse(status=404, data={'status':'404','message':MAILINGLIST_NOT_FOUND})
-
 		ed = EmailData.objects.filter(subject__icontains='introduce yourself').filter(mailing_list=m)
 		body = EmailBody.objects.filter(email_data__in=ed).values('id','body')
 		d = []
@@ -53,18 +53,22 @@ def AllEmailData(request, courseId):
 		return JsonResponse({'data':d})
 	elif request.method == 'PATCH':
 		inputdict = request.data
-		e = EmailBody.objects.get(id=inputdict['id'])
-		if not e:
-			return JsonResponse(status=404, data={'status':'404','message':"Object not found"})
+		e = ""
+		try:
+			e = EmailBody.objects.get(id=inputdict['id'],email_data__in=allEmails)
+		except:
+			return JsonResponse(status=404, data={'status':'404','message':"Operation not possible"})
 		e.body = inputdict['body']
 		e.save()
 		data = {'id':e.id,'body':e.body}
 		return JsonResponse(data)
 	elif request.method == 'DELETE':
 		inputdict = request.data
-		e = EmailBody.objects.get(id=inputdict['id'])
-		if not e:
-			return JsonResponse(status=404, data={'status':'404','message':"Object not found"})
+		e= ""
+		try:
+			e = EmailBody.objects.get(id=inputdict['id'],email_data__in=allEmails)
+		except:
+			return JsonResponse(status=404, data={'status':'404','message':"Operation not possible"})
 		e.delete()
 		return JsonResponse({})
 
