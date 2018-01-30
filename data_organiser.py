@@ -12,24 +12,24 @@ def email_formating(email):
 
 
 def subject_formatting(subject):
-	if subject is None:
-		return ""
-	p = subject.split()
-	for i in range(len(p)):
-		if p[i] == 'Re:':
-			p[i] = ''
-		if p[i] == 'Fwd:':
-			p[i] = ''
-	subject = ' '.join(p)
-	subject = subject.lstrip(' ')
-	subject = subject.rstrip(' ')
-	subject = list(subject)
-	for i in range(len(subject)):
-		if subject[i] == '"':
-			subject[i] = "\\\""
-		elif subject[i] == "'":
-			subject[i] = "\\\'"
-	return ''.join(subject)
+    if subject is None:
+        return ""
+    p = subject.split()
+    for i in range(len(p)):
+        if 'Re:' in p[i]:
+            p[i] = p[i][3:]
+        if 'Fwd:' in p[i]:
+            p[i] = p[i][4:]
+    subject = ' '.join(p)
+    subject = subject.lstrip(' ')
+    subject = subject.rstrip(' ')
+    subject = list(subject)
+    for i in range(len(subject)):
+        if subject[i] == '"':
+            subject[i] = "\\\""
+        elif subject[i] == "'":
+            subject[i] = "\\\'"
+    return ''.join(subject)
 
 
 def mailing_list_formating(mailing_list):
@@ -39,7 +39,7 @@ def mailing_list_formating(mailing_list):
         if mailing_list[i] in notWanted:
             mailing_list[i] = ''
     mailing_list = ''.join(mailing_list)
-    matches = re.findall('list (.+); contact (.+).*', mailing_list)
+    matches = re.findall('list (.+);.*contact (.+).*', mailing_list)
     return matches[0]
 
 
@@ -83,12 +83,17 @@ def body_formatting(message):
     for line in lines:
         line = line[:-1]
         if "On " in line and "wrote:" in line:
-        	break
+            break
         if line.find('>') == -1:
             editing.append(line)
     message = "\n".join(editing).rstrip('\n')
     index = message.find('You received this message because you')
     if index != -1:
-        message = message[:index-3]
+        message = message[:index - 3]
+    return message
 
+
+def message_id_formatting(message):
+    if message is not None:
+        message = message[1:-1]
     return message
