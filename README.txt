@@ -21,16 +21,16 @@ Instruction for Usage:
 1) Start the server
    -> python manage.py runserver 0.0.0.0:<port>
 
-2) GET request to "<domainName>:<port>/admin_login/<course id>" would give you meta data request for
-	the course
+2) GET request to "<domainName>:<port>/admin_login/<course id>" would give you meta data request
+	for the course
 
 3) GET request to "<domainName>/allEmails/<course id>" would return an array of dictionary in JSON
 	format with each element as {'id':email_id, 'body':email_body}
 
-4) PATCH request to "<domainName>/allEmails/<course id>" would edit the body of email which has the id 
-	that has been sent. the email body of email with id = email_id would set to email_body
+4) PATCH request to "<domainName>/allEmails/<course id>" would edit the body of email which has 
+	the id that has been sent. The email body of email with id = email_id would set to email_body
 	data format -> {'id':email_id, 'body':email_body}
 
-5) Delete request to "<domainName>/allEmails/<course id>" would delete the email body for the email
-	which has id = email_id
+5) Delete request to "<domainName>/allEmails/<course id>" would delete the email body for the
+	email which has id = email_id
 	data format -> {'id':email_id}
