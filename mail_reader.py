@@ -52,11 +52,11 @@ def read_email_from_gmail():
                     msg = email.message_from_string(
                         response_part[1].decode("utf-8", errors='ignore'))
                     for part in msg.walk():
-                        if part.get_content_type() == 'text/plain'
-                        and part.get_filename() is None:
-                            process1(msg, i, part.get_payload(decode=True)
-                                     .decode(part.get_charsets()[0]))
-                            break
+                        if part.get_content_type() == 'text/plain':
+                            if part.get_filename() is None:
+                                process1(msg, i, part.get_payload(decode=True)
+                                         .decode(part.get_charsets()[0]))
+                                break
             i -= 1
         except mail.abort:
             mail.logout()
