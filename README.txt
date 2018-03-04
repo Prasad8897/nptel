@@ -31,4 +31,7 @@ Instruction on Request to be sent:
 5) Delete request to "<domainName>:<port>/allEmails/<course id>" would delete the email body for the email which has id = email_id.
 	data format -> {'id':email_id}
 
-6) If a request cant be processed then a response with status 404 would be sent back with a JSON object with it containing the message of error.
+6) Get request to "<domainName>:<port>/number_of_posts/<course id>/<num>/" would return the top "num" number of contributors of the course(emailId and number of posts by that user).
+    Eg: num = 10 means it will return top 10 contributors of the discussion forum.
+
+7) If a request cant be processed then a response with status 404 would be sent back with a JSON object with it containing the message of error.

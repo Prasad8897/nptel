@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
-from email_data.models import Email, EmailData, MailingList, EmailBody
+from email_data.models import Email, EmailData, MailingList, EmailBody, Threads
 
 MAILINGLIST_NOT_FOUND = 'Discussion group nocXX-XXXX-discuss@nptel.iitm.ac.in'
 MAILINGLIST_NOT_FOUND += 'does not exists'
@@ -12,31 +12,33 @@ def CourseMetaData(request, courseId):
     if request.method == 'GET':
         group = courseId+"-discuss@nptel.iitm.ac.in"
         m = MailingList.objects.filter(list_id=group)
+        results = {}
         if not m.exists():
             return JsonResponse(status=404,
                                 data={'status': '404',
                                       'message': MAILINGLIST_NOT_FOUND})
         admin_email = Email.objects.filter(email=courseId+"@nptel.iitm.ac.in")
-        if not admin_email.exists():
-            return JsonResponse(status=404,
-                                data={'status': '404',
-                                      'message': MAILINGLIST_NOT_FOUND})
+        if admin_email.exists():
+            allEmails = EmailData.objects.filter(from_email=admin_email,
+                                                 mailing_list=m)
+            allEmails = allEmails.order_by('-date')
+            query = allEmails[0].date
+            results['lastAdminPostDate'] = query.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            results['lastAdminPostDate'] = 'Not Found'
         allEmails = EmailData.objects.filter(mailing_list=m).order_by('-date')
+        query = allEmails[0].date
+        results['lastUserPostDate'] = query.strftime("%Y-%m-%d %H:%M:%S")
         totalPosts = allEmails.count()
-        userPosts = allEmails.exclude(from_email=admin_email).order_by('date')
-        adminPosts = allEmails.filter(from_email=admin_email).order_by('-date')
-        count = allEmails.filter(from_email=admin_email)
-        count = count.order_by('thread').values('thread').distinct().count()
-        threads = allEmails.order_by('thread').values('thread').distinct()
-        threads = threads.count()
-        return JsonResponse({'result': {
-                    'totalPosts': totalPosts,
-                    "lastAdminPostDate": adminPosts[0].date
-                    .strftime('%Y-%m-%d %H:%M:%S'),
-                    'lastUserPostDate': userPosts[0].date
-                    .strftime('%Y-%m-%d %H:%M:%S'),
-                    'unanswered': threads-count,
-                    }})
+        results['totalPosts'] = totalPosts
+        threads = allEmails.values('thread').order_by('thread').distinct()
+        count = 0
+        for thread in threads:
+            threadDetails = Threads.objects.get(id=thread.values()[0])
+            if len(threadDetails.getIds()) == 1:
+                count += 1
+        results['unanswered'] = count
+        return JsonResponse({'result': results})
 
 
 @api_view(['GET', 'PATCH', 'DELETE'])
@@ -69,7 +71,7 @@ def AllEmailData(request, courseId):
         e.body = inputdict['body']
         e.save()
         data = {'id': e.id, 'body': e.body}
-        return JsonResponse({"result":data})
+        return JsonResponse(data)
     elif request.method == 'DELETE':
         inputdict = request.data
         e = ""
@@ -105,8 +107,7 @@ def mostAnsweredPeople(request, courseId, count):
                 emailFreq[e['from_email_id']] = 1
         for i in emailFreq.keys():
             emailFreq2[Email.objects.get(id=i).email] = emailFreq[i]
-        emailFreq = {}
-        value = sorted(emailFreq2.values())
-        # print value
-        # return JsonResponse({'result':emailFreq2})
-        return JsonResponse({})
+        value = sorted(emailFreq2.items(), key=lambda x: x[1], reverse=True)
+        emailFreq = dict((x, y) for x, y in value[:int(count)])
+        print emailFreq
+        return JsonResponse({'result': emailFreq})

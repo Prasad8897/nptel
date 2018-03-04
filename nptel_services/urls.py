@@ -17,12 +17,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from email_data.api import CourseMetaData, AllEmailData, mostAnsweredPeople
 from mail_reader import read_email_from_gmail
-#read_email_from_gmail()
+# read_email_from_gmail()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin_login/(?P<courseId>noc\d\d-[a-z][a-z]\d\d)',
         CourseMetaData),
     url(r'^allEmails/(?P<courseId>noc\d\d-[a-z][a-z]\d\d)', AllEmailData),
-    url(r'^number_of_posts/(?P<courseId>noc\d\d-[a-z][a-z]\d\d)/(?P<count>\d*)/', mostAnsweredPeople)
+    url(r'^number_of_posts/(?P<courseId>noc\d\d-[a-z][a-z]\d\d)/(?P<count>\d+)/'
+        , mostAnsweredPeople)
 ]
